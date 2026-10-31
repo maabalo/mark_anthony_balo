@@ -55,16 +55,16 @@ Each file starts with a **table of contents**, and section numbers in comments r
 
 All text is in **`index.html`**. Find the section by its comment, for example `02 EXPERIENCE`:
 
-| To change            | Where                                                                         |
-| -------------------- | ----------------------------------------------------------------------------- |
-| Name, role, location | `1. SIDEBAR` at the top of `<header class="sidebar">`                         |
-| Contact links        | `.socials` list in the sidebar, and `.print-contact` (the PDF's contact line) |
-| About text, skills   | `01 ABOUT`, where each skill is one `<li>`                                    |
-| A project            | `03 PROJECTS`: copy an `<li>` with its `<a class=\"project\">` card           |
-| A job                | `02 EXPERIENCE`: copy an `<li class="entry">` block, newest first             |
-| Education            | `04 EDUCATION` (same block format as jobs)                                    |
-| A certification      | `05 CERTIFICATIONS`: copy an `<li class="cert">`                              |
-| Search/preview text  | `<title>`, `meta description`, `og:` tags and the JSON-LD block in `<head>`   |
+| To change            | Where                                                                                             |
+| -------------------- | ------------------------------------------------------------------------------------------------- |
+| Name, role, location | `1. SIDEBAR` at the top of `<header class="sidebar">`                                             |
+| Contact links        | `.socials` list in the sidebar, and `.print-contact` (the PDF's contact line)                     |
+| About text, skills   | `01 ABOUT`, where each skill is one `<li>`                                                        |
+| A project            | `03 PROJECTS`: copy an `<li>` with its `<a class=\"project\">` card                               |
+| A job                | `02 EXPERIENCE`: copy an `<li class="entry">` block, newest first                                 |
+| Education            | `04 EDUCATION`: copy an `<li class="entry">`, with dates, degree and school only (no description) |
+| A certification      | `05 CERTIFICATIONS`: copy an `<li class="cert">`                                                  |
+| Search/preview text  | `<title>`, `meta description`, `og:` tags and the JSON-LD block in `<head>`                       |
 
 Dates use `<time datetime="2025-01">Jan 2025</time>`. The `datetime` part is the machine-readable date.
 
