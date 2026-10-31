@@ -1,6 +1,6 @@
 # Mark Anthony Balo — Portfolio
 
-A personal portfolio and resume page. It covers an about section with skills, experience, projects (web apps built with Claude), education and certifications, plus a **save as PDF** button that prints the page as a clean two-page resume.
+A personal portfolio and resume page. It covers an about section with skills, experience, personal projects (apps built with Claude), education and certifications, plus a **save as PDF** button that prints the page as a clean two-page resume.
 
 Open `index.html` in a browser. There's no build step and no framework. The only outside request is for Google Fonts.
 
@@ -32,12 +32,12 @@ Each file starts with a **table of contents**, and section numbers in comments r
 
 - **Two-column layout on desktop.** Name, role, location, section menu and links stay on the left while the content scrolls. Phones get one column.
 - **"You are here" menu.** The menu entry for the section on screen gets a longer line.
-- **Projects carousel.**
+- **Personal projects carousel.**
   - One project at a time, with the next card peeking in.
   - Navigate with ‹ › arrows, dots or the "2 / 5" counter; swipe on phones; arrow keys work when it's focused.
   - It never auto-plays.
   - Without JavaScript it's still a scrollable strip, and printing lists every project.
-  - To add a project, copy an `<li class="carousel-slide">` in `03 PROJECTS`. The dots and counter update automatically.
+  - To add a project, copy an `<li class="carousel-slide">` in `03 PERSONAL PROJECTS`. The dots and counter update automatically.
 - **Dark by default**, with a theme button: auto → light → dark. "Auto" follows the device setting.
 - **Save as PDF.** It opens the print window, and the print styles turn the page into a two-page, black-on-white resume:
   - The name, role and contact line appear at the top.
@@ -60,7 +60,7 @@ All text is in **`index.html`**. Find the section by its comment, for example `0
 | Name, role, location | `1. SIDEBAR` at the top of `<header class="sidebar">`                                             |
 | Contact links        | `.socials` list in the sidebar, and `.print-contact` (the PDF's contact line)                     |
 | About text, skills   | `01 ABOUT`, where each skill is one `<li>`                                                        |
-| A project            | `03 PROJECTS`: copy an `<li>` with its `<a class=\"project\">` card                               |
+| A project            | `03 PERSONAL PROJECTS`: copy an `<li>` with its `<a class="project">` card                        |
 | A job                | `02 EXPERIENCE`: copy an `<li class="entry">` block, newest first                                 |
 | Education            | `04 EDUCATION`: copy an `<li class="entry">`, with dates, degree and school only (no description) |
 | A certification      | `05 CERTIFICATIONS`: copy an `<li class="cert">`                                                  |
