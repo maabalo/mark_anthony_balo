@@ -1,0 +1,1083 @@
+/* ==========================================================================
+   Mark Anthony Balo — Portfolio — style.css
+   --------------------------------------------------------------------------
+   Mobile-first: base rules target phones (one column, sidebar on top).
+   From 1024px the sidebar sticks on the left (section 09). Colors, fonts
+   and sizes come from the tokens in section 01. Dark is the default look;
+   light follows the system setting or the theme button.
+
+   TABLE OF CONTENTS
+     01  Design tokens (dark default + light theme)
+     02  Base & reset
+     03  Accessibility helpers (sr-only, skip link)
+     04  Layout & sidebar
+     05  Section navigation & social links
+     06  Buttons
+     07  Sections, prose & skills
+     08  Timeline (experience, education) & certifications
+     09  Breakpoints (≥600px, ≥1024px two-column)
+     10  Print (the "save as PDF" résumé)
+     11  Reduced motion
+   ========================================================================== */
+
+/* ==========================================================================
+   01  DESIGN TOKENS
+   The light theme appears TWICE: once for the manual "light" setting and
+   once for "auto" when the system is light. Keep both blocks identical.
+   Text colors meet WCAG 2.1 AA (≥ 4.5:1) on --bg and --surface.
+   ========================================================================== */
+:root {
+  /* Surfaces */
+  --bg: #0b0d10;
+  --surface: #12161b;
+  --hover: rgb(255 255 255 / 4%);
+  --border: #242a31;
+  --glow: rgb(61 220 151 / 7%); /* soft light behind the page */
+
+  /* Text */
+  --text: #e6edf3;
+  --muted: #a3adb8;
+  --faint: #8b95a1;
+
+  /* Accent */
+  --accent: #3ddc97;
+  --on-accent: #04140d;
+  --tag-bg: rgb(61 220 151 / 10%);
+  --tag-text: #7ee8b8;
+
+  /* Type */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Shape & spacing */
+  --radius: 12px;
+  --radius-sm: 6px;
+  --gutter: 20px;
+  --control: 40px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+/* Manual light theme */
+:root[data-theme='light'] {
+  --bg: #fff;
+  --surface: #f6f8fa;
+  --hover: rgb(15 20 25 / 4%);
+  --border: #dde2e7;
+  --glow: rgb(10 122 82 / 6%);
+  --text: #0e1116;
+  --muted: #4f5964;
+  --faint: #5f6973;
+  --accent: #0a7a52;
+  --on-accent: #fff;
+  --tag-bg: rgb(10 122 82 / 9%);
+  --tag-text: #08603f;
+
+  color-scheme: light;
+}
+
+/* "Auto" theme when the system is light (same values as above) */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --bg: #fff;
+    --surface: #f6f8fa;
+    --hover: rgb(15 20 25 / 4%);
+    --border: #dde2e7;
+    --glow: rgb(10 122 82 / 6%);
+    --text: #0e1116;
+    --muted: #4f5964;
+    --faint: #5f6973;
+    --accent: #0a7a52;
+    --on-accent: #fff;
+    --tag-bg: rgb(10 122 82 / 9%);
+    --tag-text: #08603f;
+
+    color-scheme: light;
+  }
+}
+
+/* ==========================================================================
+   02  BASE & RESET
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  /* Stops iOS enlarging text in landscape. Safari still needs the prefix. */
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(900px circle at 0% 0%, var(--glow), transparent 60%), var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font: 400 16px/1.65 var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Icons: <svg class="icon"><use href="#i-NAME"/></svg> (shapes live in the sprite in index.html) */
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon--small {
+  width: 15px;
+  height: 15px;
+}
+
+/* Brand logos are filled shapes, not lines */
+.icon--fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* The sprite only holds <symbol> definitions; it never renders itself */
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* One focus style everywhere (keyboard only) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   03  ACCESSIBILITY HELPERS
+   ========================================================================== */
+
+/* Hidden visually but still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to content": appears only when focused with the keyboard */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--on-accent);
+  font: 500 13px var(--font-mono);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* Only in the printed / PDF version (section 10) */
+.print-only {
+  display: none;
+}
+
+/* ==========================================================================
+   04  LAYOUT & SIDEBAR
+   ========================================================================== */
+.layout {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sidebar {
+  display: grid;
+  gap: 32px;
+  padding-block: 56px 16px;
+}
+
+.sidebar-top {
+  display: grid;
+  gap: 10px;
+}
+
+.kicker {
+  color: var(--accent);
+  font: 500 13px var(--font-mono);
+}
+
+.name {
+  font-size: clamp(2.25rem, 8vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.role {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--faint);
+  font: 13px var(--font-mono);
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.content {
+  min-width: 0;
+}
+
+/* ==========================================================================
+   05  SECTION NAVIGATION & SOCIAL LINKS
+   ========================================================================== */
+
+/* Phones: a wrapping row of small links. Desktop (section 09): a vertical list. */
+.section-nav {
+  margin-top: 18px;
+}
+
+.section-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.section-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-block: 6px;
+  color: var(--faint);
+  font: 500 13px var(--font-mono);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-num {
+  color: var(--accent);
+}
+
+.section-nav a:hover,
+.section-nav a[aria-current='location'] {
+  color: var(--text);
+}
+
+.socials {
+  display: flex;
+  gap: 6px;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: var(--control);
+  height: var(--control);
+  border-radius: 50%;
+  color: var(--muted);
+  transition:
+    color 0.2s,
+    background-color 0.2s,
+    transform 0.2s var(--ease);
+}
+
+.social:hover {
+  background: var(--hover);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   06  BUTTONS
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--control);
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font: 500 13px var(--font-mono);
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: var(--control);
+  height: var(--control);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* ==========================================================================
+   07  SECTIONS, PROSE & SKILLS
+   ========================================================================== */
+.section {
+  padding-block: 48px;
+  scroll-margin-top: 24px;
+}
+
+.section:focus {
+  outline: none; /* focused only by the skip link */
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 24px;
+  font: 600 14px var(--font-mono);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.section-num {
+  color: var(--accent);
+}
+
+.prose {
+  display: grid;
+  gap: 16px;
+  color: var(--muted);
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.sub-title {
+  margin: 36px 0 16px;
+  color: var(--faint);
+  font: 600 12px var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.skills {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+
+.skill-group {
+  display: grid;
+  gap: 8px;
+}
+
+.skill-group dt {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.skill-note {
+  color: var(--faint);
+  font-weight: 400;
+}
+
+.skill-group dd {
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags li {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font: 500 12.5px/1.5 var(--font-mono);
+}
+
+/* ==========================================================================
+   08  TIMELINE & CERTIFICATIONS
+   ========================================================================== */
+.timeline {
+  display: grid;
+  gap: 8px;
+  margin-inline: -16px; /* entries keep their hover padding but line up with the headings */
+}
+
+/* Each entry: date on top (phones) or in a left column (≥600px, section 09) */
+.entry {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.entry:hover {
+  border-color: var(--border);
+  background: var(--hover);
+}
+
+.entry-date {
+  color: var(--faint);
+  font: 500 12.5px/1.8 var(--font-mono);
+  white-space: nowrap;
+}
+
+.entry-body {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.entry-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.entry-org {
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.entry-text {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Projects: each card is one big link */
+.section-lead {
+  margin-bottom: 20px;
+  color: var(--muted);
+}
+
+.section-lead strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Projects carousel: a sideways strip that snaps to one card at a time, with a peek at the next.
+   Arrows, dots and counter come from app.js (section 04); print shows a plain list (section 10). */
+.carousel {
+  display: grid;
+  gap: 14px;
+}
+
+.carousel-track {
+  display: grid;
+  grid-auto-columns: 88%;
+  grid-auto-flow: column;
+  gap: 12px;
+  margin: 0;
+  padding: 4px 0 6px; /* room for the cards' hover lift and focus ring */
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* the arrows and dots show the position instead */
+}
+
+.carousel-track:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.carousel-slide {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 2px;
+  margin-right: auto;
+}
+
+/* Each dot is a 24px button (big enough to tap) drawing a small dot; the current one is a wider pill */
+.carousel-dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.carousel-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  transition:
+    width 0.25s var(--ease),
+    background-color 0.25s;
+}
+
+.carousel-dot:hover::before {
+  background: var(--faint);
+}
+
+.carousel-dot[aria-current='true']::before {
+  width: 20px;
+  background: var(--accent);
+}
+
+.carousel-count {
+  margin: 0 4px 0 0;
+  color: var(--faint);
+  font: 12.5px var(--font-mono);
+}
+
+.carousel-btn[aria-disabled='true'] {
+  border-color: var(--border);
+  color: var(--faint);
+  opacity: 0.45;
+  cursor: default;
+}
+
+.project {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  height: 100%;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    transform 0.2s var(--ease);
+}
+
+.project:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.project-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding-right: 24px; /* room for the arrow, so every card's header lines up */
+}
+
+.project-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.project-kind {
+  color: var(--accent);
+  font: 500 12.5px var(--font-mono);
+}
+
+.project-arrow {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  color: var(--faint);
+  transition: color 0.2s;
+}
+
+.project:hover .project-arrow {
+  color: var(--accent);
+}
+
+.project-text {
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+.project-url {
+  color: var(--faint);
+  font: 12px var(--font-mono);
+}
+
+.certs {
+  display: grid;
+  gap: 10px;
+}
+
+.cert {
+  display: grid;
+  align-content: start; /* name + date stay together when a neighbour is taller */
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.cert-name {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.cert-meta {
+  color: var(--faint);
+  font: 12.5px var(--font-mono);
+}
+
+.more-link {
+  margin-top: 24px;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+}
+
+.text-link:hover {
+  color: var(--accent);
+}
+
+.footer {
+  padding-block: 24px 56px;
+  color: var(--faint);
+  font: 12.5px var(--font-mono);
+}
+
+/* ==========================================================================
+   09  BREAKPOINTS
+   ========================================================================== */
+
+/* ---------- ≥600px: dates in their own column, certificates two per row ---------- */
+@media (width >= 600px) {
+  :root {
+    --gutter: 32px;
+  }
+
+  .entry {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .certs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .carousel-track {
+    grid-auto-columns: 80%;
+  }
+
+  .skill-group {
+    grid-template-columns: 150px minmax(0, 1fr);
+    align-items: baseline;
+    gap: 16px;
+  }
+}
+
+/* ---------- ≥1024px: sticky sidebar on the left, content scrolls on the right ---------- */
+@media (width >= 1024px) {
+  :root {
+    --gutter: 48px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 72px;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    align-content: space-between;
+    height: 100vh;
+    height: 100dvh;
+    padding-block: 88px 56px;
+  }
+
+  .content {
+    padding-top: 40px;
+  }
+
+  /* Vertical list: "01 ──── about", the line grows for the section on screen.
+     Flex order puts the ::before line between the number and the label. */
+  .section-nav {
+    margin-top: 40px;
+  }
+
+  .section-nav ul {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .section-nav a {
+    gap: 14px;
+  }
+
+  .section-nav a::before {
+    content: '';
+    order: 1;
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.25s var(--ease);
+  }
+
+  .nav-label {
+    order: 2;
+  }
+
+  .section-nav a:hover::before,
+  .section-nav a[aria-current='location']::before {
+    width: 56px;
+  }
+
+  .section {
+    padding-block: 40px 72px;
+  }
+}
+
+/* ==========================================================================
+   10  PRINT — the "save as PDF" résumé
+   One column, black on white, sized to fit two A4/Letter pages. Contact
+   details come from .print-contact because links can't be clicked on paper.
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 12mm 15mm;
+  }
+
+  /* Listed three ways so these win over BOTH light-theme blocks in section 01
+     (equal specificity, later in the file) — whatever theme was on screen. */
+  :root,
+  :root[data-theme='light'],
+  :root:not([data-theme='dark']) {
+    --bg: #fff;
+    --surface: #fff;
+    --border: #bbb;
+    --text: #000;
+    --muted: #333;
+    --faint: #555;
+    --accent: #0a5c3e;
+    --tag-bg: transparent;
+    --tag-text: #333;
+  }
+
+  body {
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  .layout {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .sidebar {
+    position: static;
+    gap: 0;
+    height: auto;
+    padding: 0 0 3mm;
+  }
+
+  .sidebar-top {
+    gap: 1mm;
+  }
+
+  .section-nav,
+  .sidebar-bottom,
+  .skip-link,
+  .kicker,
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  /* Normal letter spacing so copied / ATS-read text keeps the spaces ("Mark Anthony Balo") */
+  .name {
+    font-size: 22pt;
+    letter-spacing: 0;
+  }
+
+  .role {
+    font-size: 12pt;
+  }
+
+  .location,
+  .print-contact {
+    color: var(--muted);
+    font: 9pt var(--font-mono);
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  .section {
+    padding-block: 3mm;
+  }
+
+  .section-title {
+    margin-bottom: 2.5mm;
+    padding-bottom: 1mm;
+    border-bottom: 0.5pt solid var(--border);
+    font-size: 9.5pt;
+  }
+
+  .prose {
+    gap: 2mm;
+  }
+
+  .sub-title {
+    margin: 3mm 0 1.5mm;
+    font-size: 8.5pt;
+  }
+
+  .skills {
+    gap: 1mm;
+  }
+
+  .skill-group {
+    grid-template-columns: 34mm minmax(0, 1fr);
+    gap: 4mm;
+  }
+
+  .skill-group dt {
+    font-size: 9.5pt;
+  }
+
+  .timeline {
+    gap: 0;
+    margin: 0;
+  }
+
+  .entry,
+  .cert {
+    padding: 1.5mm 0;
+    border: 0;
+    background: none;
+    break-inside: avoid;
+  }
+
+  /* 38mm fits "Jan 2022 — Jan 2025" without touching the title */
+  .entry {
+    grid-template-columns: 38mm minmax(0, 1fr);
+    gap: 1mm 4mm;
+  }
+
+  .entry-body {
+    gap: 0.8mm;
+  }
+
+  .entry-date {
+    font-size: 8.5pt;
+  }
+
+  .entry-title {
+    font-size: 11pt;
+  }
+
+  .entry-org {
+    font-size: 9.5pt;
+  }
+
+  .entry-text,
+  .cert-name {
+    font-size: 9.5pt;
+  }
+
+  .certs,
+  .projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 6mm;
+  }
+
+  /* The carousel prints as a plain two-column list of every project.
+     scroll-snap-type must be turned off too: otherwise Chrome still treats the strip as a
+     scroll area and writes its text after "certifications" in the PDF, the order ATS software reads. */
+  .carousel-track {
+    grid-auto-flow: row;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .section-lead {
+    margin-bottom: 2mm;
+    font-size: 9.5pt;
+  }
+
+  /* Projects start page 2, so the heading never sits alone at the bottom of page 1 */
+  #projects {
+    break-before: page;
+  }
+
+  /* Projects print as text with their web address (links can't be clicked on paper).
+     position: static matters: a positioned card is drawn in a later layer, and the PDF
+     stores text in drawing order, so the cards' text would come after "certifications"
+     for applicant tracking systems (ATS). */
+  .project {
+    position: static;
+    gap: 0.5mm;
+    padding: 1.5mm 0;
+    border: 0;
+    background: none;
+    break-inside: avoid;
+  }
+
+  .project-arrow {
+    display: none;
+  }
+
+  .project-name {
+    font-size: 10.5pt;
+  }
+
+  .project-kind,
+  .project-url {
+    font-size: 8.5pt;
+  }
+
+  .project-text {
+    font-size: 9.5pt;
+  }
+
+  .cert-meta {
+    font-size: 8pt;
+  }
+
+  /* Tags print as plain words (no pill background) */
+  .tags {
+    gap: 0.5mm 3.5mm;
+  }
+
+  .tags li {
+    padding: 0;
+    font-size: 8.5pt;
+  }
+
+  .section-title,
+  .sub-title {
+    break-after: avoid;
+  }
+}
+
+/* ==========================================================================
+   11  REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
