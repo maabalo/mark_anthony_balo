@@ -373,9 +373,9 @@
             <span class="section-num">03</span> personal projects
           </h2>
           <p class="section-lead">
-            Apps I built with <strong>Claude</strong>, Anthropic's AI, as my coding partner: web apps that run
-            entirely in the browser, a private AI tool that runs a language model on your own computer, and a
-            developer tool that maps how code connects.
+            Apps I built with <strong>Claude</strong>, Anthropic's AI, as my coding partner: a live community
+            app with accounts and a database, web apps that run entirely in the browser, a private AI tool
+            that runs a language model on your own computer, and a developer tool that maps how code connects.
           </p>
           <!--
             Carousel: a swipeable strip, one project per view. Without JavaScript it still scrolls
@@ -389,6 +389,29 @@
               tabindex="0"
               aria-label="Personal projects: swipe, scroll or use the arrows"
             >
+              <li class="carousel-slide">
+                <a
+                  class="project"
+                  href="https://nextcamp.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div class="project-head">
+                    <h3 class="project-name">Next Camp</h3>
+                    <span class="project-kind">Camping community app</span>
+                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                      <use href="#i-arrow" />
+                    </svg>
+                  </div>
+                  <span class="project-text"
+                    >Find real campsites, check in with a photo, earn XP and climb the leaderboard. Live app
+                    with accounts, campsite submissions and an admin review, built on Firebase and
+                    Vercel.</span
+                  >
+                  <span class="project-url">nextcamp.vercel.app</span>
+                  <span class="sr-only">(opens in a new tab)</span>
+                </a>
+              </li>
               <li class="carousel-slide">
                 <a
                   class="project"
@@ -525,7 +548,7 @@
             </ul>
             <div class="carousel-controls no-print" hidden>
               <div id="projectDots" class="carousel-dots" role="group" aria-label="Go to a project"></div>
-              <p id="projectCount" class="carousel-count" aria-hidden="true">1 / 6</p>
+              <p id="projectCount" class="carousel-count" aria-hidden="true">1 / 7</p>
               <button
                 id="projectPrev"
                 class="icon-btn carousel-btn"
