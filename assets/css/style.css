@@ -262,6 +262,11 @@ ol {
   letter-spacing: -0.03em;
 }
 
+.tagline {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
 .role {
   font-size: 1.15rem;
   font-weight: 600;
@@ -372,6 +377,13 @@ ol {
 
 .btn:hover {
   border-color: var(--accent);
+}
+
+.btn-primary {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .icon-btn {
@@ -544,92 +556,22 @@ ol {
   font-weight: 600;
 }
 
-/* Projects carousel: a sideways strip that snaps to one card at a time, with a peek at the next.
-   Arrows, dots and counter come from app.js (section 04); print shows a plain list (section 10). */
-.carousel {
+/* Projects: three featured cards with a screenshot, then a compact list of the rest */
+.projects {
   display: grid;
-  gap: 14px;
-}
-
-.carousel-track {
-  display: grid;
-  grid-auto-columns: 88%;
-  grid-auto-flow: column;
   gap: 12px;
   margin: 0;
-  padding: 4px 0 6px; /* room for the cards' hover lift and focus ring */
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* the arrows and dots show the position instead */
-}
-
-.carousel-track:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
-
-.carousel-slide {
-  min-width: 0;
-  scroll-snap-align: start;
-}
-
-.carousel-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.carousel-dots {
-  display: flex;
-  gap: 2px;
-  margin-right: auto;
-}
-
-/* Each dot is a 24px button (big enough to tap) drawing a small dot; the current one is a wider pill */
-.carousel-dot {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
   padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
+  list-style: none;
 }
 
-.carousel-dot::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--border);
-  transition:
-    width 0.25s var(--ease),
-    background-color 0.25s;
-}
-
-.carousel-dot:hover::before {
-  background: var(--faint);
-}
-
-.carousel-dot[aria-current='true']::before {
-  width: 20px;
-  background: var(--accent);
-}
-
-.carousel-count {
-  margin: 0 4px 0 0;
-  color: var(--faint);
-  font: 12.5px var(--font-mono);
-}
-
-.carousel-btn[aria-disabled='true'] {
-  border-color: var(--border);
-  color: var(--faint);
-  opacity: 0.45;
-  cursor: default;
+.project-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 4px);
 }
 
 .project {
@@ -759,11 +701,11 @@ ol {
   }
 
   .certs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .carousel-track {
-    grid-auto-columns: 80%;
+  .projects--more {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .skill-group {
@@ -996,24 +938,13 @@ ol {
     gap: 0 6mm;
   }
 
-  /* The carousel prints as a plain two-column list of every project.
-     scroll-snap-type must be turned off too: otherwise Chrome still treats the strip as a
-     scroll area and writes its text after "certifications" in the PDF, the order ATS software reads. */
-  .carousel-track {
-    grid-auto-flow: row;
-    padding: 0;
-    overflow: visible;
-    scroll-snap-type: none;
+  .project-shot {
+    display: none;
   }
 
   .section-lead {
     margin-bottom: 2mm;
     font-size: 9.5pt;
-  }
-
-  /* Projects start page 2, so the heading never sits alone at the bottom of page 1 */
-  #projects {
-    break-before: page;
   }
 
   /* Projects print as text with their web address (links can't be clicked on paper).
@@ -1079,5 +1010,12 @@ ol {
   *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* Phones and tablets: the section menu makes way for the content */
+@media (width < 1024px) {
+  .section-nav {
+    display: none;
   }
 }

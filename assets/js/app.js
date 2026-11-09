@@ -2,18 +2,17 @@
    Mark Anthony Balo — Portfolio — app.js
    --------------------------------------------------------------------------
    Small extras on top of a page that works fully without JavaScript:
-   the theme button, the "you are here" highlight in the section menu, the
-   projects carousel controls, and "save as PDF". Plain script (no modules)
+   the theme button, the "you are here" highlight in the section menu,
+   and "save as PDF". Plain script (no modules)
    so it also runs from file://.
 
    TABLE OF CONTENTS
      01  Settings & DOM references
      02  Theme (auto → light → dark)
      03  Section highlight (which section is on screen)
-     04  Projects carousel (arrows, dots, counter)
-     05  Save as PDF
-     06  Helpers (storage, announcements)
-     07  Init
+     04  Save as PDF
+     05  Helpers (storage, announcements)
+     06  Init
    ========================================================================== */
 (function () {
   'use strict';
@@ -35,11 +34,6 @@
     year: document.getElementById('year'),
     announcer: document.getElementById('announcer'),
     navLinks: Array.from(document.querySelectorAll('.section-nav a[href^="#"]')),
-    projectTrack: document.getElementById('projectTrack'),
-    projectDots: document.getElementById('projectDots'),
-    projectCount: document.getElementById('projectCount'),
-    projectPrev: document.getElementById('projectPrev'),
-    projectNext: document.getElementById('projectNext'),
   };
 
   let currentTheme = 'auto';
@@ -131,89 +125,7 @@
   }
 
   /* ==========================================================================
-     04  PROJECTS CAROUSEL
-     The strip itself is plain CSS scroll-snap (swipe, trackpad and arrow keys
-     work natively). This adds the ‹ › buttons, one dot per project, the
-     "2 / 5" counter, and screen-reader labels. No auto-play.
-     ========================================================================== */
-  /** Set up the carousel controls (skipped when the page has no projects strip). */
-  function initCarousel() {
-    const track = els.projectTrack;
-    if (!track) return;
-    const slides = projectSlides();
-    slides.forEach((slide, index) => labelSlide(slide, index, slides.length));
-    els.projectDots.replaceChildren(...slides.map(makeDot));
-    els.projectPrev.addEventListener('click', () => goToSlide(currentSlide() - 1));
-    els.projectNext.addEventListener('click', () => goToSlide(currentSlide() + 1));
-    track.addEventListener('scroll', () => requestAnimationFrame(updateCarousel), { passive: true });
-    window.addEventListener('resize', updateCarousel);
-    track.closest('.carousel').querySelector('.carousel-controls').hidden = false;
-    updateCarousel();
-  }
-
-  /** The project cards (list items) in order. */
-  function projectSlides() {
-    return Array.from(els.projectTrack.children);
-  }
-
-  /** A project's name, e.g. "Tessera". */
-  function slideName(slide) {
-    return slide.querySelector('.project-name').textContent.trim();
-  }
-
-  /** Screen readers hear each card as "slide 2 of 5: Vitae". */
-  function labelSlide(slide, index, total) {
-    slide.setAttribute('role', 'group');
-    slide.setAttribute('aria-roledescription', 'slide');
-    slide.setAttribute('aria-label', `${index + 1} of ${total}: ${slideName(slide)}`);
-  }
-
-  /** One dot button per project. */
-  function makeDot(slide, index) {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'carousel-dot';
-    dot.setAttribute('aria-label', `Project ${index + 1}: ${slideName(slide)}`);
-    dot.addEventListener('click', () => goToSlide(index));
-    return dot;
-  }
-
-  /** Index of the card at the start of the strip (the last one once scrolled to the end). */
-  function currentSlide() {
-    const track = els.projectTrack;
-    const slides = projectSlides();
-    if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) return slides.length - 1;
-    const distances = slides.map((slide) =>
-      Math.abs(slide.offsetLeft - slides[0].offsetLeft - track.scrollLeft),
-    );
-    return distances.indexOf(Math.min(...distances));
-  }
-
-  /** Scroll to a card (clamped to the first and last) and announce it. */
-  function goToSlide(index) {
-    const slides = projectSlides();
-    const target = Math.max(0, Math.min(index, slides.length - 1));
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const left = slides[target].offsetLeft - slides[0].offsetLeft;
-    els.projectTrack.scrollTo({ left, behavior: reduceMotion ? 'auto' : 'smooth' });
-    announce(`Project ${target + 1} of ${slides.length}: ${slideName(slides[target])}`);
-  }
-
-  /** Dots, counter and arrow states for the card now in view. */
-  function updateCarousel() {
-    const index = currentSlide();
-    const total = projectSlides().length;
-    Array.from(els.projectDots.children).forEach((dot, i) => {
-      if (i === index) dot.setAttribute('aria-current', 'true');
-      else dot.removeAttribute('aria-current');
-    });
-    els.projectCount.textContent = `${index + 1} / ${total}`;
-    els.projectPrev.setAttribute('aria-disabled', String(index === 0));
-    els.projectNext.setAttribute('aria-disabled', String(index === total - 1));
-  }
-
-  /* ==========================================================================
-     05  SAVE AS PDF
+     04  SAVE AS PDF
      The browser's print window makes the PDF; the print styles in
      style.css (section 10) turn the page into a one-column résumé.
      ========================================================================== */
@@ -239,7 +151,7 @@
   }
 
   /* ==========================================================================
-     06  HELPERS
+     05  HELPERS
      ========================================================================== */
   /** localStorage read that never throws (blocked storage → null). */
   function readStorage(key) {
@@ -282,9 +194,9 @@
   }
 
   /* ==========================================================================
-     07  INIT
+     06  INIT
      ========================================================================== */
-  /** Start: theme, current year, section highlight, carousel and buttons. */
+  /** Start: theme, current year, section highlight and buttons. */
   function init() {
     applyTheme(readTheme());
     els.year.textContent = String(new Date().getFullYear());
@@ -292,7 +204,6 @@
     els.pdfBtn.addEventListener('click', savePdf);
     bindPrintTitle();
     watchSections();
-    initCarousel();
   }
 
   init();

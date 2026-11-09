@@ -13,9 +13,9 @@
 
   LAYOUT MAP
     0. sprite    — shared SVG icons (referenced with <use href="#i-NAME">)
-    1. sidebar   — name, title, location, section navigation, social links
+    1. sidebar   — name, title, one-line summary, section navigation, contact
                    (sticky on the left on wide screens, on top on phones)
-    2. main      — 01 about · 02 experience · 03 personal projects · 04 education · 05 certifications
+    2. main      — 01 about · 02 projects · 03 experience · 04 skills · 05 education & certifications
     3. footer    — copyright line
   ==========================================================================
 -->
@@ -23,10 +23,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Mark Anthony Balo — Packaged App Developer &amp; Web Developer</title>
+    <title>Mark Anthony Balo — Web &amp; AI Developer</title>
     <meta
       name="description"
-      content="Mark Anthony Balo builds websites and business apps at Accenture in Cebu, Philippines: front-end development, Adobe Experience Manager, Sitecore and Microsoft Power Platform."
+      content="Mark Anthony Balo builds web apps and AI tools, from a live community app to private tools that run a language model on your own computer. Cebu, Philippines."
     />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
@@ -36,12 +36,16 @@
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://maabalo.github.io/mark_anthony_balo/" />
     <link rel="canonical" href="https://maabalo.github.io/mark_anthony_balo/" />
-    <meta property="og:title" content="Mark Anthony Balo — Packaged App Developer & Web Developer" />
+    <meta property="og:title" content="Mark Anthony Balo — Web & AI Developer" />
     <meta
       property="og:description"
-      content="Websites and business apps: front-end development, AEM, Sitecore and Microsoft Power Platform. Accenture, Cebu."
+      content="Web apps and AI tools, built with Claude as a coding partner. Cebu, Philippines."
     />
-    <meta name="twitter:card" content="summary" />
+    <meta
+      property="og:image"
+      content="https://maabalo.github.io/mark_anthony_balo/assets/images/preview.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link
       rel="icon"
@@ -128,8 +132,6 @@
         <path d="M12 12v6M9 15l3 3 3-3" />
       </symbol>
       <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" /></symbol>
-      <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol>
-      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol>
       <symbol id="i-pin" viewBox="0 0 24 24">
         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z" />
         <circle cx="12" cy="10" r="3" />
@@ -144,10 +146,11 @@
         <div class="sidebar-top">
           <p class="kicker"><span aria-hidden="true">&gt;</span> hello, I'm</p>
           <h1 class="name">Mark Anthony Balo</h1>
-          <p class="role">Packaged App Developer Analyst</p>
+          <p class="role">Web &amp; AI Developer</p>
+          <p class="tagline">I build web apps and AI tools, and ship them.</p>
           <p class="location">
             <svg class="icon icon--small" aria-hidden="true" focusable="false"><use href="#i-pin" /></svg>
-            Accenture · Cebu, Philippines
+            Analyst at Accenture · Cebu, Philippines
           </p>
 
           <!-- app.js (section 03) marks the link of the section on screen with aria-current. -->
@@ -157,23 +160,21 @@
                 <a href="#about"><span class="nav-num">01</span> <span class="nav-label">about</span></a>
               </li>
               <li>
-                <a href="#experience"
-                  ><span class="nav-num">02</span> <span class="nav-label">experience</span></a
+                <a href="#projects"
+                  ><span class="nav-num">02</span> <span class="nav-label">projects</span></a
                 >
               </li>
               <li>
-                <a href="#projects"
-                  ><span class="nav-num">03</span> <span class="nav-label">personal projects</span></a
+                <a href="#experience"
+                  ><span class="nav-num">03</span> <span class="nav-label">experience</span></a
                 >
+              </li>
+              <li>
+                <a href="#skills"><span class="nav-num">04</span> <span class="nav-label">skills</span></a>
               </li>
               <li>
                 <a href="#education"
-                  ><span class="nav-num">04</span> <span class="nav-label">education</span></a
-                >
-              </li>
-              <li>
-                <a href="#certifications"
-                  ><span class="nav-num">05</span> <span class="nav-label">certifications</span></a
+                  ><span class="nav-num">05</span> <span class="nav-label">education</span></a
                 >
               </li>
             </ul>
@@ -230,7 +231,8 @@
           </ul>
 
           <div class="sidebar-actions">
-            <!-- Prints this page as a one-page résumé (print styles in style.css section 10). -->
+            <a class="btn btn-primary" href="mailto:markanthony.balo93@gmail.com">email me</a>
+            <!-- Prints this page as a résumé (print styles in style.css section 10). -->
             <button id="pdfBtn" class="btn" type="button">
               <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pdf" /></svg>
               save as PDF
@@ -253,78 +255,217 @@
           <h2 id="aboutTitle" class="section-title"><span class="section-num">01</span> about</h2>
           <div class="prose">
             <p>
-              I'm a <strong>Packaged App Developer Analyst</strong> at <strong>Accenture</strong> in Cebu,
-              Philippines, designing, building and configuring applications that meet business process and
-              application requirements.
+              I build <strong>web apps</strong> and <strong>AI tools</strong>, from a live community app with
+              accounts and a database to private tools that run a language model on your own computer.
             </p>
             <p>
-              Over nearly 10 years at Accenture, I've moved from managing web content in CMS platforms to
-              building
-              <strong>Microsoft Power Platform</strong> apps and automations that simplify everyday work.
+              I work with <strong>Claude</strong> as my AI coding partner: I decide what to build, test it on
+              real screens, and ship it.
             </p>
             <p>
-              I'm currently expanding into <strong>AI engineering</strong>: LLM-based applications, prompt
-              design and agentic AI.
+              By day I'm a Packaged App Developer Analyst at <strong>Accenture</strong> in Cebu. Over nearly
+              10 years there, I've moved from managing web content to building
+              <strong>Microsoft Power Platform</strong> apps and automations.
             </p>
           </div>
-
-          <h3 class="sub-title">Skills &amp; tools</h3>
-          <dl class="skills">
-            <div class="skill-group">
-              <dt>Web</dt>
-              <dd>
-                <ul class="tags">
-                  <li>HTML</li>
-                  <li>CSS</li>
-                  <li>JavaScript</li>
-                  <li>jQuery</li>
-                  <li>Bootstrap</li>
-                  <li>Figma</li>
-                </ul>
-              </dd>
-            </div>
-            <div class="skill-group">
-              <dt>Platforms &amp; CMS</dt>
-              <dd>
-                <ul class="tags">
-                  <li>Adobe Experience Manager</li>
-                  <li>Sitecore</li>
-                  <li>Microsoft 365</li>
-                  <li>Cloud infrastructure</li>
-                </ul>
-              </dd>
-            </div>
-            <div class="skill-group">
-              <dt>Power Platform</dt>
-              <dd>
-                <ul class="tags">
-                  <li>Power Apps</li>
-                  <li>Power Automate</li>
-                </ul>
-              </dd>
-            </div>
-            <div class="skill-group">
-              <dt>AI <span class="skill-note">(learning)</span></dt>
-              <dd>
-                <ul class="tags">
-                  <li>Prompt Engineering</li>
-                </ul>
-              </dd>
-            </div>
-            <div class="skill-group">
-              <dt>Also</dt>
-              <dd>
-                <ul class="tags">
-                  <li>Python</li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
         </section>
 
-        <!-- ---------- 02 EXPERIENCE (newest first) ---------- -->
+        <!-- ---------- 02 PROJECTS (built with Claude) ---------- -->
+        <section id="projects" class="section" aria-labelledby="projectsTitle" tabindex="-1">
+          <h2 id="projectsTitle" class="section-title"><span class="section-num">02</span> projects</h2>
+          <p class="section-lead">
+            Apps I built with <strong>Claude</strong>, Anthropic's AI, as my coding partner.
+          </p>
+          <ul class="projects projects--featured">
+            <li>
+              <a
+                class="project"
+                href="https://nextcamp.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="project-shot"
+                  src="assets/images/next-camp.jpg"
+                  width="1200"
+                  height="750"
+                  alt="Next Camp web app, About page"
+                  loading="lazy"
+                />
+                <div class="project-head">
+                  <h3 class="project-name">Next Camp</h3>
+                  <span class="project-kind">Full-stack web app</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >A live camping community: find campsites, check in with a photo, earn XP and climb the
+                  leaderboard. Accounts, a database, server functions and an admin review, built on Firebase
+                  and Vercel.</span
+                >
+                <span class="project-url">nextcamp.vercel.app</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="project"
+                href="https://maabalo.github.io/distill/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="project-shot"
+                  src="assets/images/distill.jpg"
+                  width="1200"
+                  height="750"
+                  alt="Distill text summarizer"
+                  loading="lazy"
+                />
+                <div class="project-head">
+                  <h3 class="project-name">Distill</h3>
+                  <span class="project-kind">Local AI tool</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >Summarizes text with a language model running on your own computer through Ollama, with a
+                  web interface and a terminal command. Private and free.</span
+                >
+                <span class="project-url">maabalo.github.io/distill</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="project"
+                href="https://github.com/maabalo/atlas"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="project-shot"
+                  src="assets/images/atlas.jpg"
+                  width="1200"
+                  height="750"
+                  alt="Atlas code map, an interactive graph of a project"
+                  loading="lazy"
+                />
+                <div class="project-head">
+                  <h3 class="project-name">Atlas</h3>
+                  <span class="project-kind">AI developer tool</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >Maps how a project's files, functions, HTML and CSS connect, as an interactive graph.
+                  Includes an MCP server so AI assistants can ask it about your code. Open source Python, no
+                  dependencies.</span
+                >
+                <span class="project-url">github.com/maabalo/atlas</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+          </ul>
+          <h3 class="sub-title">More projects</h3>
+          <ul class="projects projects--more">
+            <li>
+              <a
+                class="project"
+                href="https://maabalo.github.io/Folio/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="project-head">
+                  <h3 class="project-name">Folio</h3>
+                  <span class="project-kind">Document viewer</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >Opens documents, spreadsheets, code, media and archives right in the browser. Files are
+                  never uploaded.</span
+                >
+                <span class="project-url">maabalo.github.io/Folio</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="project"
+                href="https://maabalo.github.io/vitae/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="project-head">
+                  <h3 class="project-name">Vitae</h3>
+                  <span class="project-kind">Resume builder</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >Pick a design and save a resume as a PDF with real text that applicant tracking systems can
+                  read.</span
+                >
+                <span class="project-url">maabalo.github.io/vitae</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="project"
+                href="https://maabalo.github.io/chroma/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="project-head">
+                  <h3 class="project-name">Chroma</h3>
+                  <span class="project-kind">Color palettes</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >Generate palettes, lock the colors you like, check their contrast and export them as
+                  code.</span
+                >
+                <span class="project-url">maabalo.github.io/chroma</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+            <li>
+              <a
+                class="project"
+                href="https://maabalo.github.io/tessera/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="project-head">
+                  <h3 class="project-name">Tessera</h3>
+                  <span class="project-kind">QR code generator</span>
+                  <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
+                    <use href="#i-arrow" />
+                  </svg>
+                </div>
+                <span class="project-text"
+                  >QR codes for links, Wi-Fi, contacts and more, with custom colors and a built-in scan
+                  check.</span
+                >
+                <span class="project-url">maabalo.github.io/tessera</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- ---------- 03 EXPERIENCE (newest first) ---------- -->
         <section id="experience" class="section" aria-labelledby="experienceTitle" tabindex="-1">
-          <h2 id="experienceTitle" class="section-title"><span class="section-num">02</span> experience</h2>
+          <h2 id="experienceTitle" class="section-title"><span class="section-num">03</span> experience</h2>
           <ol class="timeline">
             <li class="entry">
               <p class="entry-date"><time datetime="2025-01">Jan 2025</time> — Present</p>
@@ -367,213 +508,66 @@
           </ol>
         </section>
 
-        <!-- ---------- 03 PERSONAL PROJECTS (apps built with Claude) ---------- -->
-        <section id="projects" class="section" aria-labelledby="projectsTitle" tabindex="-1">
-          <h2 id="projectsTitle" class="section-title">
-            <span class="section-num">03</span> personal projects
-          </h2>
-          <p class="section-lead">
-            Apps I built with <strong>Claude</strong>, Anthropic's AI, as my coding partner: a live community
-            web app with accounts and a database, web apps that run entirely in the browser, a private AI tool
-            that runs a language model on your own computer, and a developer tool that maps how code connects.
-          </p>
-          <!--
-            Carousel: a swipeable strip, one project per view. Without JavaScript it still scrolls
-            sideways; app.js (section 04) adds the arrows, dots and counter. Printing shows all
-            projects as a list (style.css section 10).
-          -->
-          <div class="carousel" role="group" aria-roledescription="carousel" aria-label="Personal projects">
-            <ul
-              id="projectTrack"
-              class="projects carousel-track"
-              tabindex="0"
-              aria-label="Personal projects: swipe, scroll or use the arrows"
-            >
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://nextcamp.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Next Camp</h3>
-                    <span class="project-kind">Camping community web app</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >Find real campsites, check in with a photo, earn XP and climb the leaderboard. Live web
-                    app with accounts, campsite submissions and an admin review, built on Firebase and
-                    Vercel.</span
-                  >
-                  <span class="project-url">nextcamp.vercel.app</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://maabalo.github.io/Folio/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Folio</h3>
-                    <span class="project-kind">Document viewer</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >A private viewer for documents, spreadsheets, code, media and archives. Files open right
-                    in the browser and are never uploaded.</span
-                  >
-                  <span class="project-url">maabalo.github.io/Folio</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://maabalo.github.io/vitae/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Vitae</h3>
-                    <span class="project-kind">Resume / CV builder</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >Fill in your details, pick a design and save a clean resume as a PDF with real text that
-                    applicant tracking systems can read.</span
-                  >
-                  <span class="project-url">maabalo.github.io/vitae</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://maabalo.github.io/chroma/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Chroma</h3>
-                    <span class="project-kind">Color palette generator</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >Generate color palettes, lock the colors you like, check their contrast, and export them
-                    as code.</span
-                  >
-                  <span class="project-url">maabalo.github.io/chroma</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://maabalo.github.io/tessera/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Tessera</h3>
-                    <span class="project-kind">QR code generator</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >QR codes for links, Wi-Fi, contacts, email, phone and SMS, with custom colors, a center
-                    symbol and a built-in scan check.</span
-                  >
-                  <span class="project-url">maabalo.github.io/tessera</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://maabalo.github.io/distill/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Distill</h3>
-                    <span class="project-kind">AI text summarizer</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >Summarizes text with a local AI model through Ollama, with a web interface and a terminal
-                    command. Private and free: it runs on your own computer, with an online preview.</span
-                  >
-                  <span class="project-url">maabalo.github.io/distill</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-              <li class="carousel-slide">
-                <a
-                  class="project"
-                  href="https://github.com/maabalo/atlas"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div class="project-head">
-                    <h3 class="project-name">Atlas</h3>
-                    <span class="project-kind">Code map tool</span>
-                    <svg class="icon icon--small project-arrow" aria-hidden="true" focusable="false">
-                      <use href="#i-arrow" />
-                    </svg>
-                  </div>
-                  <span class="project-text"
-                    >Maps how a project's files, functions, HTML and CSS connect, with an interactive graph
-                    and checks for unused code. A Python command-line tool with no dependencies, open
-                    source.</span
-                  >
-                  <span class="project-url">github.com/maabalo/atlas</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-            </ul>
-            <div class="carousel-controls no-print" hidden>
-              <div id="projectDots" class="carousel-dots" role="group" aria-label="Go to a project"></div>
-              <p id="projectCount" class="carousel-count" aria-hidden="true">1 / 7</p>
-              <button
-                id="projectPrev"
-                class="icon-btn carousel-btn"
-                type="button"
-                aria-controls="projectTrack"
-                aria-label="Previous project"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron-left" /></svg>
-              </button>
-              <button
-                id="projectNext"
-                class="icon-btn carousel-btn"
-                type="button"
-                aria-controls="projectTrack"
-                aria-label="Next project"
-              >
-                <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chevron-right" /></svg>
-              </button>
+        <!-- ---------- 04 SKILLS ---------- -->
+        <section id="skills" class="section" aria-labelledby="skillsTitle" tabindex="-1">
+          <h2 id="skillsTitle" class="section-title"><span class="section-num">04</span> skills</h2>
+          <dl class="skills">
+            <div class="skill-group">
+              <dt>AI</dt>
+              <dd>
+                <ul class="tags">
+                  <li>Claude Code</li>
+                  <li>Prompt Engineering</li>
+                  <li>Local LLMs (Ollama)</li>
+                  <li>MCP servers</li>
+                </ul>
+              </dd>
             </div>
-          </div>
+            <div class="skill-group">
+              <dt>Frontend</dt>
+              <dd>
+                <ul class="tags">
+                  <li>HTML</li>
+                  <li>CSS</li>
+                  <li>JavaScript</li>
+                  <li>jQuery</li>
+                  <li>Bootstrap</li>
+                  <li>Figma</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="skill-group">
+              <dt>Backend &amp; tools</dt>
+              <dd>
+                <ul class="tags">
+                  <li>Python</li>
+                  <li>Firebase</li>
+                  <li>Vercel</li>
+                  <li>Git &amp; GitHub</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="skill-group">
+              <dt>Platforms</dt>
+              <dd>
+                <ul class="tags">
+                  <li>Power Apps</li>
+                  <li>Power Automate</li>
+                  <li>Adobe Experience Manager</li>
+                  <li>Sitecore</li>
+                  <li>Microsoft 365</li>
+                  <li>Cloud infrastructure</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
         </section>
 
-        <!-- ---------- 04 EDUCATION ---------- -->
+        <!-- ---------- 05 EDUCATION & CERTIFICATIONS ---------- -->
         <section id="education" class="section" aria-labelledby="educationTitle" tabindex="-1">
-          <h2 id="educationTitle" class="section-title"><span class="section-num">04</span> education</h2>
+          <h2 id="educationTitle" class="section-title">
+            <span class="section-num">05</span> education &amp; certifications
+          </h2>
           <ol class="timeline">
             <li class="entry">
               <p class="entry-date"><time datetime="2015">2015</time> — <time datetime="2016">2016</time></p>
@@ -590,43 +584,19 @@
               </div>
             </li>
           </ol>
-        </section>
-
-        <!-- ---------- 05 CERTIFICATIONS (newest first) ---------- -->
-        <section id="certifications" class="section" aria-labelledby="certTitle" tabindex="-1">
-          <h2 id="certTitle" class="section-title"><span class="section-num">05</span> certifications</h2>
+          <h3 class="sub-title">Certifications</h3>
           <ul class="certs">
             <li class="cert">
               <p class="cert-name">Reinvention with Agentic AI</p>
               <p class="cert-meta">Accenture · <time datetime="2026-01">Jan 2026</time></p>
             </li>
             <li class="cert">
-              <p class="cert-name">Microsoft 365 Fundamentals: Cloud Benefits &amp; Considerations</p>
+              <p class="cert-name">Microsoft 365 Fundamentals (2 courses)</p>
               <p class="cert-meta">Skillsoft · <time datetime="2024-11">Nov 2024</time></p>
             </li>
             <li class="cert">
-              <p class="cert-name">Microsoft 365 Fundamentals: Understanding Cloud Concepts</p>
-              <p class="cert-meta">Skillsoft · <time datetime="2024-11">Nov 2024</time></p>
-            </li>
-            <li class="cert">
-              <p class="cert-name">Building a canvas app from scratch in Power Apps 2024</p>
+              <p class="cert-name">Power Apps 2024 (4 courses)</p>
               <p class="cert-meta">Skillsoft · <time datetime="2024-03">Mar 2024</time></p>
-            </li>
-            <li class="cert">
-              <p class="cert-name">Creating your first apps in Power Apps 2024</p>
-              <p class="cert-meta">Skillsoft · <time datetime="2024-03">Mar 2024</time></p>
-            </li>
-            <li class="cert">
-              <p class="cert-name">Managing apps in Power Apps 2024</p>
-              <p class="cert-meta">Skillsoft · <time datetime="2024-03">Mar 2024</time></p>
-            </li>
-            <li class="cert">
-              <p class="cert-name">Working with canvas app controls in Power Apps 2024</p>
-              <p class="cert-meta">Skillsoft · <time datetime="2024-03">Mar 2024</time></p>
-            </li>
-            <li class="cert">
-              <p class="cert-name">Thriving Mind</p>
-              <p class="cert-meta">Thrive Global · <time datetime="2023-03">Mar 2023</time></p>
             </li>
           </ul>
 
@@ -645,7 +615,8 @@
         <!-- ===================== 3. FOOTER ===================== -->
         <footer class="footer no-print">
           <p>
-            © <span id="year">2026</span> Mark Anthony Balo · Built by hand with HTML, CSS &amp; JavaScript.
+            © <span id="year">2026</span> Mark Anthony Balo · Built with HTML, CSS &amp; JavaScript, with
+            Claude as my coding partner.
           </p>
         </footer>
       </main>

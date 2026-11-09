@@ -32,12 +32,9 @@ Each file starts with a **table of contents**, and section numbers in comments r
 
 - **Two-column layout on desktop.** Name, role, location, section menu and links stay on the left while the content scrolls. Phones get one column.
 - **"You are here" menu.** The menu entry for the section on screen gets a longer line.
-- **Personal projects carousel.**
-  - One project at a time, with the next card peeking in.
-  - Navigate with ‹ › arrows, dots or the "2 / 5" counter; swipe on phones; arrow keys work when it's focused.
-  - It never auto-plays.
-  - Without JavaScript it's still a scrollable strip, and printing lists every project.
-  - To add a project, copy an `<li class="carousel-slide">` in `03 PERSONAL PROJECTS`. The dots and counter update automatically.
+- **Projects.** Three featured cards with screenshots, then a compact list of the rest.
+  - To change a featured project, edit its `<li>` in `02 PROJECTS` and put its screenshot in `assets/images/`.
+  - To add a smaller project, copy an `<li>` in the `projects--more` list.
 - **Dark by default**, with a theme button: auto → light → dark. "Auto" follows the device setting.
 - **Save as PDF.** It opens the print window, and the print styles turn the page into a two-page, black-on-white resume:
   - The name, role and contact line appear at the top.
