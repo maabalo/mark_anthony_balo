@@ -4,12 +4,12 @@ Updates to this project, newest first. Older entries come from the Git history (
 
 ## 2026-11-14
 ### Changed
-- Projects: Next Camp is now **Tentorium**: new name, link (https://tentorium.vercel.app; the old address no longer opened), address line and a fresh About-page screenshot (`assets/images/tentorium.jpg`, replaces `next-camp.jpg`); the link preview image (`preview.jpg`) is remade to match. (not pushed yet)
+- Projects: Next Camp is now **Tentorium**: new name, link (https://tentorium.vercel.app; the old address no longer opened), address line and a fresh About-page screenshot (`assets/images/tentorium.jpg`, replaces `next-camp.jpg`); the link preview image (`preview.jpg`) is remade to match. (1b55f02)
 
 ## 2026-11-12
 ### Notes
-- Added CLAUDE.md: notes for Claude on how this project works, its rules and open items. (not pushed yet)
-- Started this changelog; from now on every update adds an entry here. (not pushed yet)
+- Added CLAUDE.md: notes for Claude on how this project works, its rules and open items. (1b55f02)
+- Started this changelog; from now on every update adds an entry here. (1b55f02)
 
 ## 2026-11-09
 ### Changed
