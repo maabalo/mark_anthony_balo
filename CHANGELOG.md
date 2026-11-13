@@ -4,7 +4,7 @@ Updates to this project, newest first. Older entries come from the Git history (
 
 ## 2026-11-14
 ### Changed
-- Projects: the Atlas screenshot now shows today's Atlas (the pastel dust globe with Claude's glowing core and strands), made from public projects only so no private names appear. (not pushed yet)
+- Projects: the Atlas screenshot now shows today's Atlas (the pastel dust globe with Claude's glowing core and strands), made from public projects only so no private names appear. (4c5400c)
 - Projects: Next Camp is now **Tentorium**: new name, link (https://tentorium.vercel.app; the old address no longer opened), address line and a fresh About-page screenshot (`assets/images/tentorium.jpg`, replaces `next-camp.jpg`); the link preview image (`preview.jpg`) is remade to match. (1b55f02)
 
 ## 2026-11-12
