@@ -2,6 +2,10 @@
 
 Updates to this project, newest first. Older entries come from the Git history (commit hash in brackets).
 
+## 2026-11-16
+### Added
+- Projects: **LifeOps** as the second featured card, after Tentorium: a full-stack AI web app (life-admin assistant), linking to its public repo github.com/maabalo/lifeops, with a screenshot of its Today dashboard made from sample data only (`assets/images/lifeops.jpg`, 1200 × 750). Save as PDF still fits on 2 pages. (not pushed yet)
+
 ## 2026-11-14
 ### Changed
 - Projects: the Atlas screenshot now shows today's Atlas (the pastel dust globe with Claude's glowing core and strands), made from public projects only so no private names appear. (4c5400c)

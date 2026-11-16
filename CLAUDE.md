@@ -8,7 +8,7 @@ Read this first when working here. Update it whenever the process, a decision or
 
 ## Stack and structure
 - Plain HTML, CSS, JavaScript, no build step: `index.html`, `assets/css/style.css`, `assets/js/app.js` (theme, section highlight, Save as PDF), `assets/images/` (project screenshots and the link preview image).
-- Sections: 01 about · 02 projects (3 featured cards with screenshots + "more projects") · 03 experience · 04 skills · 05 education & certifications.
+- Sections: 01 about · 02 projects (4 featured cards with screenshots + "more projects") · 03 experience · 04 skills · 05 education & certifications.
 
 ## Run, test, deploy
 - Open `index.html` directly, or serve the folder locally; check phone and desktop with Playwright.
@@ -23,6 +23,7 @@ Read this first when working here. Update it whenever the process, a decision or
 - Education dates are correct as shown (BS 2015–2016).
 - Tentorium (renamed from Next Camp, 2026-11-13; live at tentorium.vercel.app) is a "**web app**", not an "app". Projects were built with Claude as coding partner (footer says so).
 - Tentorium's screenshot (`assets/images/tentorium.jpg`, 1200 × 750, day look) shows its About page because permission for some campsite photos is unconfirmed. `preview.jpg` (1200 × 630, top of this page) shows the card too: remake both if the card changes.
+- LifeOps (2026-11-16) is the second featured card, after Tentorium (user's choice); it links to the public repo github.com/maabalo/lifeops (no live site: it runs on your own computer). Its screenshot (`assets/images/lifeops.jpg`) uses sample data only: never a screenshot of real LifeOps data.
 - Certifications: Power Apps and Microsoft 365 courses merged; "Thriving Mind" removed (can be restored).
 
 ## Open items
